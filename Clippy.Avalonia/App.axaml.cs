@@ -13,7 +13,7 @@ namespace Clippy.Avalonia
     {
         public new static App? Current => (App?)Application.Current;
 
-        public IServiceProvider? Services { get; private set; }
+        public IServiceProvider Services { get; private set; } = null!;
 
         public override void Initialize()
         {
@@ -26,7 +26,10 @@ namespace Clippy.Avalonia
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow();
+                desktop.MainWindow = new MainWindow
+                {
+                    DataContext = Services.GetRequiredService<ClippyViewModel>()
+                };
             }
 
             base.OnFrameworkInitializationCompleted();

@@ -6,13 +6,13 @@ namespace Clippy.Avalonia.Tests
     public class BasicTests
     {
         [Fact]
-        public void MockChatService_Returns_Mock_Response()
+        public async System.Threading.Tasks.Task MockChatService_Returns_Mock_Response()
         {
             // Arrange
             var service = new MockChatService();
 
             // Act
-            var result = service.SendChatAsync(new System.Collections.Generic.List<Clippy.Core.Interfaces.IMessage>()).Result;
+            var result = await service.SendChatAsync(new System.Collections.Generic.List<Clippy.Core.Interfaces.IMessage>());
 
             // Assert
             Assert.Equal("This is a mock response from Clippy.", result);

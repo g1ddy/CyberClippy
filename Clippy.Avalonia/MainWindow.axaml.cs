@@ -9,10 +9,5 @@ namespace Clippy.Avalonia
         {
             InitializeComponent();
         }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
     }
 }

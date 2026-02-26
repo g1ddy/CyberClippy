@@ -14,17 +14,17 @@ namespace Clippy.Avalonia.Services.Mocks
             return Task.FromResult("This is a mock response from Clippy.");
         }
 
-        public async IAsyncEnumerable<string> StreamChatAsync(IEnumerable<IMessage> Messages, CancellationToken cancellationToken = default)
+        public async IAsyncEnumerable<string> StreamChatAsync(IEnumerable<IMessage> _, CancellationToken cancellationToken = default)
         {
-            await Task.Delay(100);
+            await Task.Delay(100, cancellationToken);
             yield return "This ";
-            await Task.Delay(100);
+            await Task.Delay(100, cancellationToken);
             yield return "is ";
-            await Task.Delay(100);
+            await Task.Delay(100, cancellationToken);
             yield return "a ";
-            await Task.Delay(100);
+            await Task.Delay(100, cancellationToken);
             yield return "mock ";
-            await Task.Delay(100);
+            await Task.Delay(100, cancellationToken);
             yield return "response.";
         }
     }
