@@ -6,13 +6,13 @@
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="100"
              x:Class="Clippy.Avalonia.Controls.UserMessage"
              x:DataType="vm:UserMessageViewModel">
-    <Grid Margin="0,8,0,8" HorizontalAlignment="Right">
+    <Grid Margin="{StaticResource MessageMargin}" HorizontalAlignment="Right">
         <Border Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
-                CornerRadius="8"
-                Padding="12">
+                CornerRadius="{StaticResource DefaultCornerRadius}"
+                Padding="{StaticResource DefaultPadding}">
             <TextBlock Text="{Binding MessageText}"
                        TextWrapping="Wrap"
-                       MaxWidth="300"
+                       MaxWidth="{StaticResource MessageMaxWidth}"
                        HorizontalAlignment="Left"/>
         </Border>
         <!-- Triangle mimic could go here, omitting for simplicity as per plan -->

@@ -6,7 +6,7 @@
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="100"
              x:Class="Clippy.Avalonia.Controls.SystemMessage"
              x:DataType="vm:SystemMessageViewModel">
-    <Grid Margin="0,8,0,8" HorizontalAlignment="Center">
+    <Grid Margin="{StaticResource MessageMargin}" HorizontalAlignment="Center">
          <!-- System message is usually invisible or just a separator -->
     </Grid>
 </UserControl>

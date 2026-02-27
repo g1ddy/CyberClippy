@@ -6,19 +6,19 @@
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="100"
              x:Class="Clippy.Avalonia.Controls.ClippyMessage"
              x:DataType="vm:ClippyMessageViewModel">
-    <Grid Margin="0,8,0,8" HorizontalAlignment="Left">
+    <Grid Margin="{StaticResource MessageMargin}" HorizontalAlignment="Left">
         <Border Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
-                CornerRadius="8"
-                Padding="12">
+                CornerRadius="{StaticResource DefaultCornerRadius}"
+                Padding="{StaticResource DefaultPadding}">
             <StackPanel Spacing="4">
                 <TextBlock Text="{Binding StreamingText}"
                            IsVisible="{Binding IsStreaming}"
                            TextWrapping="Wrap"
-                           MaxWidth="300"/>
+                           MaxWidth="{StaticResource MessageMaxWidth}"/>
                  <TextBlock Text="{Binding MessageText}"
                            IsVisible="{Binding !IsStreaming}"
                            TextWrapping="Wrap"
-                           MaxWidth="300"/>
+                           MaxWidth="{StaticResource MessageMaxWidth}"/>
             </StackPanel>
         </Border>
     </Grid>
