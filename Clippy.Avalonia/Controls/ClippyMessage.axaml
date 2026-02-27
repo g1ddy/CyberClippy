@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Clippy.Core.ViewModels.Messages"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="100"
+             x:Class="Clippy.Avalonia.Controls.ClippyMessage"
+             x:DataType="vm:ClippyMessageViewModel">
+    <Grid Margin="0,8,0,8" HorizontalAlignment="Left">
+        <Border Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+                CornerRadius="8"
+                Padding="12">
+            <StackPanel Spacing="4">
+                <TextBlock Text="{Binding StreamingText}"
+                           IsVisible="{Binding IsStreaming}"
+                           TextWrapping="Wrap"
+                           MaxWidth="300"/>
+                 <TextBlock Text="{Binding MessageText}"
+                           IsVisible="{Binding !IsStreaming}"
+                           TextWrapping="Wrap"
+                           MaxWidth="300"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

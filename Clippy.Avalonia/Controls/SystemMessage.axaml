@@ -1,0 +1,12 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Clippy.Core.ViewModels.Messages"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="100"
+             x:Class="Clippy.Avalonia.Controls.SystemMessage"
+             x:DataType="vm:SystemMessageViewModel">
+    <Grid Margin="0,8,0,8" HorizontalAlignment="Center">
+         <!-- System message is usually invisible or just a separator -->
+    </Grid>
+</UserControl>
