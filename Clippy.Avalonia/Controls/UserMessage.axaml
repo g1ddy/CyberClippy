@@ -1,0 +1,20 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Clippy.Core.ViewModels.Messages"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="100"
+             x:Class="Clippy.Avalonia.Controls.UserMessage"
+             x:DataType="vm:UserMessageViewModel">
+    <Grid Margin="{StaticResource MessageMargin}" HorizontalAlignment="Right">
+        <Border Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+                CornerRadius="{StaticResource DefaultCornerRadius}"
+                Padding="{StaticResource DefaultPadding}">
+            <TextBlock Text="{Binding MessageText}"
+                       TextWrapping="Wrap"
+                       MaxWidth="{StaticResource MessageMaxWidth}"
+                       HorizontalAlignment="Left"/>
+        </Border>
+        <!-- Triangle mimic could go here, omitting for simplicity as per plan -->
+    </Grid>
+</UserControl>

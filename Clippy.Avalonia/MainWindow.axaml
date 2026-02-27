@@ -2,8 +2,64 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:vm="using:Clippy.Core.ViewModels"
+        xmlns:vmm="using:Clippy.Core.ViewModels.Messages"
+        xmlns:controls="using:Clippy.Avalonia.Controls"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="600"
         x:Class="Clippy.Avalonia.MainWindow"
-        Title="Clippy.Avalonia">
-    <TextBlock Text="Hello World" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        x:DataType="vm:ClippyViewModel"
+        Title="Clippy"
+        TransparencyLevelHint="Mica"
+        Background="{DynamicResource SystemRegionBrush}"
+        ExtendClientAreaToDecorationsHint="True">
+
+    <Grid RowDefinitions="*,Auto" Margin="{StaticResource ChatAreaMargin}">
+
+        <!-- Chat Area -->
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding MessagesVM}">
+                <ItemsControl.DataTemplates>
+                    <DataTemplate DataType="vmm:ClippyMessageViewModel">
+                        <controls:ClippyMessage />
+                    </DataTemplate>
+                    <DataTemplate DataType="vmm:UserMessageViewModel">
+                        <controls:UserMessage />
+                    </DataTemplate>
+                    <DataTemplate DataType="vmm:SystemMessageViewModel">
+                        <controls:SystemMessage />
+                    </DataTemplate>
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- Input Area -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" Margin="{StaticResource InputAreaMargin}">
+             <Border Grid.Column="0"
+                    CornerRadius="{StaticResource DefaultCornerRadius}"
+                    BorderThickness="1"
+                    BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}"
+                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                    Padding="{StaticResource SmallPadding}">
+                <TextBox Text="{Binding CurrentText, Mode=TwoWay}"
+                         Watermark="Ask me anything.."
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         MaxHeight="{StaticResource InputMaxHeight}"
+                         BorderThickness="0"
+                         Background="Transparent">
+                    <TextBox.KeyBindings>
+                        <KeyBinding Gesture="Enter" Command="{Binding SendPromptCommand}" />
+                    </TextBox.KeyBindings>
+                </TextBox>
+            </Border>
+
+            <Button Grid.Column="1"
+                    Command="{Binding SendPromptCommand}"
+                    Margin="{StaticResource SendButtonMargin}"
+                    VerticalAlignment="Bottom"
+                    Padding="{StaticResource ButtonPadding}">
+                <PathIcon Data="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" Width="20" Height="20"/>
+            </Button>
+        </Grid>
+    </Grid>
 </Window>

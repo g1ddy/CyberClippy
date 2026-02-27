@@ -20,7 +20,7 @@ namespace Clippy.Core.ViewModels
 {
     public partial class ClippyViewModel : ObservableObject
 	{
-		public ObservableCollection<MessageViewModel> MessagesVM = new();
+		public ObservableCollection<MessageViewModel> MessagesVM { get; set; } = new();
 		public ObservableCollection<IMessage> Messages = new();
 
 		[ObservableProperty]
