@@ -16,7 +16,7 @@ This document outlines the strategy for porting the Clippy application from WinU
     -   Create a main window that launches and displays a "Hello World" or basic placeholder to verify the setup.
 
 ## Phase 2: Core UI & MVVM Integration
-**Goal:** Replicate the main chat interface using Avalonia controls.
+**Goal:** Replicate the main chat interface using Avalonia controls. **(COMPLETED)**
 
 1.  **Port ViewModels:**
     -   Reuse `Clippy.Core` ViewModels (`ClippyViewModel`, etc.).
@@ -28,6 +28,14 @@ This document outlines the strategy for porting the Clippy application from WinU
 3.  **Styles & Resources:**
     -   Port `CubeKit.UI` styles to Avalonia Styles/Themes.
     -   Migrate assets (images, icons) to Avalonia resources.
+4.  **UI Polish & Deferred Features:**
+    -   Implement `ShineUITextblock` and `ShimmerControl` loading state for incoming messages.
+    -   Create `MessageTriangle` for chat bubbles.
+    -   Add `BoxShadow` mimicking `DropShadowPanel`.
+    -   Implement list item entrance animations.
+    -   Integrate `Markdown.Avalonia` for chat message rendering.
+    -   Implement `AutoScrollBehavior` to stick chat scroll to the bottom.
+    -   Refine "Shift+Enter" vs "Enter" in the chat input.
 
 ## Phase 3: Platform Specific Features
 **Goal:** Implement OS-specific behaviors like global hotkeys and window transparency.

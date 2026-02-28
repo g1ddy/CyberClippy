@@ -5,16 +5,19 @@
              xmlns:vm="using:Clippy.Core.ViewModels.Messages"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="100"
              x:Class="Clippy.Avalonia.Controls.UserMessage"
+             xmlns:controls="using:Clippy.Avalonia.Controls"
              x:DataType="vm:UserMessageViewModel">
-    <Grid Margin="{StaticResource MessageMargin}" HorizontalAlignment="Right">
-        <Border Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+    <Grid Margin="{StaticResource MessageMargin}" HorizontalAlignment="Right" ColumnDefinitions="Auto,Auto">
+        <Border Grid.Column="0"
+                Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
                 CornerRadius="{StaticResource DefaultCornerRadius}"
-                Padding="{StaticResource DefaultPadding}">
+                Padding="{StaticResource DefaultPadding}"
+                BoxShadow="0 4 8 0 #40000000">
             <TextBlock Text="{Binding MessageText}"
                        TextWrapping="Wrap"
                        MaxWidth="{StaticResource MessageMaxWidth}"
                        HorizontalAlignment="Left"/>
         </Border>
-        <!-- Triangle mimic could go here, omitting for simplicity as per plan -->
+        <controls:MessageTriangle Grid.Column="1" Margin="0, 0, -10, 10" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
     </Grid>
 </UserControl>

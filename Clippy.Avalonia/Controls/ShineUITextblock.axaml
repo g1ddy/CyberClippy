@@ -1,0 +1,19 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:md="clr-namespace:Markdown.Avalonia;assembly=Markdown.Avalonia"
+             xmlns:controls="using:Clippy.Avalonia.Controls"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="100"
+             x:Class="Clippy.Avalonia.Controls.ShineUITextblock">
+    <Grid>
+        <md:MarkdownScrollViewer x:Name="MarkdownBlock"
+                                Markdown="{Binding $parent[controls:ShineUITextblock].Text}"
+                                IsVisible="{Binding !$parent[controls:ShineUITextblock].IsLoading}" />
+        <StackPanel x:Name="Shimmer" Spacing="10" Margin="0, 6, 4, 6" IsVisible="{Binding $parent[controls:ShineUITextblock].IsLoading}">
+            <controls:ShimmerControl Width="284" Height="10"/>
+            <controls:ShimmerControl Width="284" Height="10"/>
+            <controls:ShimmerControl Width="244" Height="10" HorizontalAlignment="Left"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
