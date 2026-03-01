@@ -9,6 +9,7 @@
     <Grid>
         <md:MarkdownScrollViewer x:Name="MarkdownBlock"
                                 Markdown="{Binding $parent[controls:ShineUITextblock].Text}"
+                                SaveScrollValueWhenContentUpdated="True"
                                 IsVisible="{Binding !$parent[controls:ShineUITextblock].IsLoading}" />
         <StackPanel x:Name="Shimmer" Spacing="10" Margin="0, 6, 4, 6" IsVisible="{Binding $parent[controls:ShineUITextblock].IsLoading}">
             <controls:ShimmerControl Width="284" Height="10"/>

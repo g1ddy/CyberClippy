@@ -23,8 +23,6 @@ namespace Clippy.Avalonia.Controls
             set => SetValue(IsLoadingProperty, value);
         }
 
-        public bool IsTextVisible => !IsLoading && !string.IsNullOrEmpty(Text);
-
         public ShineUITextblock()
         {
             InitializeComponent();
