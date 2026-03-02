@@ -5,20 +5,23 @@
              xmlns:vm="using:Clippy.Core.ViewModels.Messages"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="100"
              x:Class="Clippy.Avalonia.Controls.ClippyMessage"
+             xmlns:controls="using:Clippy.Avalonia.Controls"
              x:DataType="vm:ClippyMessageViewModel">
-    <Grid Margin="{StaticResource MessageMargin}" HorizontalAlignment="Left">
-        <Border Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+    <Grid Margin="{StaticResource MessageMargin}" HorizontalAlignment="Left" ColumnDefinitions="Auto,Auto" RowDefinitions="Auto">
+        <controls:MessageTriangle Grid.Column="0" Margin="-10, 0, 0, 10" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <controls:MessageTriangle.RenderTransform>
+                <RotateTransform Angle="180"/>
+            </controls:MessageTriangle.RenderTransform>
+        </controls:MessageTriangle>
+        <Border Grid.Column="1"
+                Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
                 CornerRadius="{StaticResource DefaultCornerRadius}"
-                Padding="{StaticResource DefaultPadding}">
+                Padding="{StaticResource DefaultPadding}"
+                BoxShadow="0 4 8 0 #40000000">
             <StackPanel Spacing="4">
-                <TextBlock Text="{Binding StreamingText}"
-                           IsVisible="{Binding IsStreaming}"
-                           TextWrapping="Wrap"
-                           MaxWidth="{StaticResource MessageMaxWidth}"/>
-                 <TextBlock Text="{Binding MessageText}"
-                           IsVisible="{Binding !IsStreaming}"
-                           TextWrapping="Wrap"
-                           MaxWidth="{StaticResource MessageMaxWidth}"/>
+                <controls:ShineUITextblock Text="{Binding MessageText}"
+                                         IsLoading="{Binding IsStreaming}"
+                                         MaxWidth="{StaticResource MessageMaxWidth}"/>
             </StackPanel>
         </Border>
     </Grid>

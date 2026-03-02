@@ -16,7 +16,7 @@
     <Grid RowDefinitions="*,Auto" Margin="{StaticResource ChatAreaMargin}">
 
         <!-- Chat Area -->
-        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" controls:AutoScrollBehavior.AutoScroll="True">
             <ItemsControl ItemsSource="{Binding MessagesVM}">
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="vmm:ClippyMessageViewModel">
@@ -40,16 +40,15 @@
                     BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}"
                     Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                     Padding="{StaticResource SmallPadding}">
-                <TextBox Text="{Binding CurrentText, Mode=TwoWay}"
+                <TextBox Name="InputTextBox"
+                         Text="{Binding CurrentText, Mode=TwoWay}"
                          Watermark="Ask me anything.."
                          AcceptsReturn="True"
                          TextWrapping="Wrap"
                          MaxHeight="{StaticResource InputMaxHeight}"
                          BorderThickness="0"
-                         Background="Transparent">
-                    <TextBox.KeyBindings>
-                        <KeyBinding Gesture="Enter" Command="{Binding SendPromptCommand}" />
-                    </TextBox.KeyBindings>
+                         Background="Transparent"
+                         KeyDown="InputTextBox_KeyDown">
                 </TextBox>
             </Border>
 
