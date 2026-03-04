@@ -12,6 +12,13 @@ namespace Clippy.Avalonia
             InitializeComponent();
         }
 
+        private void Window_Closing(object? sender, global::Avalonia.Controls.WindowClosingEventArgs e)
+        {
+            // Intercept window close to keep application running for Phase 3 (Tray icon/Hotkeys)
+            e.Cancel = true;
+            this.Hide();
+        }
+
         private void InputTextBox_KeyDown(object? sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
