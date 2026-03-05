@@ -11,8 +11,7 @@
         Title="Clippy"
         TransparencyLevelHint="Mica, AcrylicBlur, Blur, Transparent, None"
         Background="{DynamicResource SystemRegionBrush}"
-        ExtendClientAreaToDecorationsHint="True"
-        Closing="Window_Closing">
+        ExtendClientAreaToDecorationsHint="True">
 
     <Grid RowDefinitions="*,Auto" Margin="{StaticResource ChatAreaMargin}">
 
