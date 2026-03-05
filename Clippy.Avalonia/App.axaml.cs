@@ -26,6 +26,10 @@ namespace Clippy.Avalonia
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
+#if PHASE3_TRAY_ICON
+                desktop.ShutdownMode = global::Avalonia.Controls.ShutdownMode.OnExplicitShutdown;
+#endif
+
                 desktop.MainWindow = new MainWindow
                 {
                     DataContext = Services.GetRequiredService<ClippyViewModel>()

@@ -9,15 +9,20 @@
         x:Class="Clippy.Avalonia.MainWindow"
         x:DataType="vm:ClippyViewModel"
         Title="Clippy"
-        TransparencyLevelHint="Mica"
+        TransparencyLevelHint="Mica, AcrylicBlur, Blur, Transparent, None"
         Background="{DynamicResource SystemRegionBrush}"
         ExtendClientAreaToDecorationsHint="True">
 
     <Grid RowDefinitions="*,Auto" Margin="{StaticResource ChatAreaMargin}">
 
         <!-- Chat Area -->
-        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" controls:AutoScrollBehavior.AutoScroll="True">
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <ItemsControl ItemsSource="{Binding MessagesVM}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel VerticalAlignment="Bottom" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
                 <ItemsControl.DataTemplates>
                     <DataTemplate DataType="vmm:ClippyMessageViewModel">
                         <controls:ClippyMessage />
