@@ -88,7 +88,15 @@ namespace Clippy.Avalonia
                 }
             };
 
-            _globalHook.RunAsync();
+            try
+            {
+                _globalHook.RunAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log exception if global hook fails to start (e.g., permissions)
+                Console.WriteLine($"Failed to start global hook: {ex.Message}");
+            }
         }
 
         private void TrayIcon_Show_Click(object? sender, EventArgs e)
