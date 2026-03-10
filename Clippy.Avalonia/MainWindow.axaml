@@ -10,7 +10,8 @@
         x:DataType="vm:ClippyViewModel"
         Title="Clippy"
         TransparencyLevelHint="Mica, AcrylicBlur, Blur, Transparent, None"
-        Background="{DynamicResource SystemRegionBrush}"
+        Background="Transparent"
+        Topmost="True"
         ExtendClientAreaToDecorationsHint="True">
 
     <Grid RowDefinitions="*,Auto" Margin="{StaticResource ChatAreaMargin}">

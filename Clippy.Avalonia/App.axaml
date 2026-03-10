@@ -6,6 +6,21 @@
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
+    <TrayIcon.Icons>
+        <TrayIcons>
+            <TrayIcon Icon="/Assets/Clippy.png" ToolTipText="Clippy">
+                <TrayIcon.Menu>
+                    <NativeMenu>
+                        <NativeMenuItem Header="Show" Click="TrayIcon_Show_Click" />
+                        <NativeMenuItem Header="Settings" Click="TrayIcon_Settings_Click" />
+                        <NativeMenuItemSeparator />
+                        <NativeMenuItem Header="Exit" Click="TrayIcon_Exit_Click" />
+                    </NativeMenu>
+                </TrayIcon.Menu>
+            </TrayIcon>
+        </TrayIcons>
+    </TrayIcon.Icons>
+
     <Application.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <converters:InvertBoolToVisibilityConverter x:Key="InvertBoolToVisibilityConverter" />
