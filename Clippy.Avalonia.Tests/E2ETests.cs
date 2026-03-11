@@ -14,6 +14,9 @@ namespace Clippy.Avalonia.Tests
 {
     public class E2ETests
     {
+        private const string UserMessage = "Hello, Clippy!";
+        private const string MockResponse = "This is a mock response.";
+
         [AvaloniaFact]
         public void AppLaunch_MainWindowIsCreated()
         {
@@ -68,7 +71,7 @@ namespace Clippy.Avalonia.Tests
             var initialCount = viewModel.MessagesVM.Count;
 
             // Enter text
-            textBox.Text = "Hello, Clippy!";
+            textBox.Text = UserMessage;
 
             // Simulate clicking the send button via its command binding (or UI raising)
             // Headless does not easily support generic mouse clicks without pointing to specific coordinates,
@@ -79,6 +82,8 @@ namespace Clippy.Avalonia.Tests
             }
             else
             {
+                // Log a warning or throw an exception
+                System.Console.WriteLine("Warning: Button command is null.");
                 // Fallback if no command is bound directly but we still want to simulate
                 viewModel.SendPromptCommand.Execute(null);
             }
@@ -88,8 +93,8 @@ namespace Clippy.Avalonia.Tests
 
             // Assert that there are now 2 more messages: the user message and the system/mock response
             Assert.Equal(initialCount + 2, viewModel.MessagesVM.Count);
-            Assert.Equal("Hello, Clippy!", viewModel.MessagesVM[initialCount].MessageText);
-            Assert.Equal("This is a mock response.", viewModel.MessagesVM[initialCount + 1].MessageText);
+            Assert.Equal(UserMessage, viewModel.MessagesVM[initialCount].MessageText);
+            Assert.Equal(MockResponse, viewModel.MessagesVM[initialCount + 1].MessageText);
 
             // Capture a screenshot of the window after the response
             var frame = window.CaptureRenderedFrame();
