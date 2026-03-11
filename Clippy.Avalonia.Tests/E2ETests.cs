@@ -17,6 +17,17 @@ namespace Clippy.Avalonia.Tests
         private const string UserMessage = "Hello, Clippy!";
         private const string MockResponse = "This is a mock response.";
 
+        private readonly string _docsImageDir;
+
+        public E2ETests()
+        {
+            _docsImageDir = System.IO.Path.Combine(System.AppContext.BaseDirectory, "..", "..", "..", "..", "docs", "images");
+            if (!System.IO.Directory.Exists(_docsImageDir))
+            {
+                System.IO.Directory.CreateDirectory(_docsImageDir);
+            }
+        }
+
         [AvaloniaFact]
         public void AppLaunch_MainWindowIsCreated()
         {
@@ -38,7 +49,8 @@ namespace Clippy.Avalonia.Tests
             var frame = window.CaptureRenderedFrame();
             if (frame != null)
             {
-                frame.Save("screenshot_AppLaunch.png");
+                var savePath = System.IO.Path.Combine(_docsImageDir, "screenshot_AppLaunch.png");
+                frame.Save(savePath);
             }
 
             window.Close();
@@ -100,7 +112,8 @@ namespace Clippy.Avalonia.Tests
             var frame = window.CaptureRenderedFrame();
             if (frame != null)
             {
-                frame.Save("screenshot_SendMessage.png");
+                var savePath = System.IO.Path.Combine(_docsImageDir, "screenshot_SendMessage.png");
+                frame.Save(savePath);
             }
 
             window.Close();
