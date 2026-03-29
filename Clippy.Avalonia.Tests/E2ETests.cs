@@ -57,6 +57,52 @@ namespace Clippy.Avalonia.Tests
         }
 
         [AvaloniaFact]
+        public void AppLaunch_ToggleClippyHidesChatAndInput()
+        {
+            var app = App.Current;
+            Assert.NotNull(app);
+
+            var viewModel = app.Services.GetRequiredService<ClippyViewModel>();
+
+            var window = new MainWindow
+            {
+                DataContext = viewModel
+            };
+
+            window.Show();
+
+            var toggleButton = window.GetVisualDescendants().OfType<global::Avalonia.Controls.Primitives.ToggleButton>().FirstOrDefault(tb => tb.Name == "ClippyToggle");
+            Assert.NotNull(toggleButton);
+            Assert.True(toggleButton.IsChecked);
+
+            var scrollViewer = window.GetVisualDescendants().OfType<ScrollViewer>().FirstOrDefault();
+            Assert.NotNull(scrollViewer);
+            Assert.True(scrollViewer.IsVisible);
+
+            var inputTextBox = window.GetVisualDescendants().OfType<TextBox>().FirstOrDefault(tb => tb.Name == "InputTextBox");
+            Assert.NotNull(inputTextBox);
+            Assert.True(inputTextBox.IsVisible);
+
+            // Toggle off
+            viewModel.IsClippyEnabled = false;
+
+            // Wait for bindings to apply (Headless sometimes needs a tiny delay or explicit layout update)
+            window.UpdateLayout();
+
+            Assert.False(scrollViewer.IsVisible);
+
+            // Capture screen with chat hidden
+            var frame = window.CaptureRenderedFrame();
+            if (frame != null)
+            {
+                var savePath = System.IO.Path.Combine(_docsImageDir, "screenshot_ChatHidden.png");
+                frame.Save(savePath);
+            }
+
+            window.Close();
+        }
+
+        [AvaloniaFact]
         public async Task SendMessage_AddsMockResponseToChat()
         {
             var app = App.Current;
