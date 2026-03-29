@@ -24,6 +24,24 @@ namespace Clippy.Avalonia
         }
 #endif
 
+        private void Hide_Click(object? sender, global::Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void Settings_Click(object? sender, global::Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            // Placeholder for Settings
+        }
+
+        private void Exit_Click(object? sender, global::Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            if (global::Avalonia.Application.Current?.ApplicationLifetime is global::Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                desktop.Shutdown();
+            }
+        }
+
         private void InputTextBox_KeyDown(object? sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
