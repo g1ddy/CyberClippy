@@ -81,7 +81,9 @@ namespace Clippy.Avalonia.Tests
 
             var inputTextBox = window.GetVisualDescendants().OfType<TextBox>().FirstOrDefault(tb => tb.Name == "InputTextBox");
             Assert.NotNull(inputTextBox);
-            Assert.True(inputTextBox.IsVisible);
+            var inputAreaGrid = window.GetVisualDescendants().OfType<Grid>().FirstOrDefault(g => g.Name == "InputAreaGrid");
+            Assert.NotNull(inputAreaGrid);
+            Assert.True(inputAreaGrid.IsVisible);
 
             // Toggle off
             viewModel.IsClippyEnabled = false;
@@ -90,6 +92,7 @@ namespace Clippy.Avalonia.Tests
             window.UpdateLayout();
 
             Assert.False(scrollViewer.IsVisible);
+            Assert.False(inputAreaGrid.IsVisible);
 
             // Capture screen with chat hidden
             var frame = window.CaptureRenderedFrame();
