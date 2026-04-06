@@ -1,0 +1,127 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:settings="using:Clippy.Avalonia.Controls.Settings"
+        xmlns:vm="using:Clippy.Avalonia.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="1090" d:DesignHeight="800"
+        x:Class="Clippy.Avalonia.SettingsWindow"
+        x:DataType="vm:SettingsViewModel"
+        Width="1090" Height="800"
+        Title="Clippy Settings"
+        TransparencyLevelHint="Mica, AcrylicBlur, Blur, Transparent, None"
+        Background="{DynamicResource SystemRegionBrush}">
+
+    <Panel Background="Transparent">
+      <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="AppTitleBar"
+                IsHitTestVisible="False"
+                Height="40"
+                Margin="12,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="AppFontIcon"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Source="avares://Clippy.Avalonia/Assets/Clippy.png"
+                       Width="24"
+                       Height="24"/>
+                <TextBlock x:Name="AppTitle"
+                           Text="Clippy by FireCube"
+                           VerticalAlignment="Center"
+                           Margin="8,0,0,0"
+                           FontWeight="SemiBold"/>
+                <TextBlock Text=" - Settings"
+                           VerticalAlignment="Center"
+                           Margin="2,0,0,0"
+                           Opacity="0.7"/>
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" Margin="0,10,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Margin="100,20,40,40" Spacing="8">
+                    <StackPanel Margin="4,4,4,24" Spacing="8" Orientation="Horizontal">
+                        <TextBlock FontSize="24" FontWeight="SemiBold">Clippy by FireCube</TextBlock>
+                        <TextBlock FontSize="20" Opacity="0.7" FontWeight="SemiBold" VerticalAlignment="Bottom"> - 1.0 (Avalonia)</TextBlock>
+                    </StackPanel>
+
+                    <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4,28,4,2">Clippy Options</TextBlock>
+
+                    <settings:SettingsBlockControl Title="Keyboard" Description="Note: Support for other shortcuts is not yet supported">
+                        <settings:SettingsBlockControl.Icon>
+                            <TextBlock Text="⌨️" FontSize="24" VerticalAlignment="Center"/>
+                        </settings:SettingsBlockControl.Icon>
+                        <settings:SettingsBlockControl.SettingsActionableElement>
+                            <ToggleSwitch IsChecked="{Binding Settings.KeyboardEnabled}" OnContent="Win + Shift + C" OffContent="Off"/>
+                        </settings:SettingsBlockControl.SettingsActionableElement>
+                    </settings:SettingsBlockControl>
+
+                    <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4,28,4,2">Personalisation Options</TextBlock>
+
+                    <settings:SettingsBlockControl Title="Autopin Clippy" Description="Always pin Clippy to the top of the screen on startup">
+                        <settings:SettingsBlockControl.Icon>
+                            <TextBlock Text="📌" FontSize="24" VerticalAlignment="Center"/>
+                        </settings:SettingsBlockControl.Icon>
+                        <settings:SettingsBlockControl.SettingsActionableElement>
+                            <ToggleSwitch IsChecked="{Binding Settings.AutoPin}" OnContent="On" OffContent="Off"/>
+                        </settings:SettingsBlockControl.SettingsActionableElement>
+                    </settings:SettingsBlockControl>
+
+                    <settings:SettingsBlockControl Title="Translucent background" Description="Toggle a translucent or transparent window background.">
+                        <settings:SettingsBlockControl.Icon>
+                            <TextBlock Text="🪟" FontSize="24" VerticalAlignment="Center"/>
+                        </settings:SettingsBlockControl.Icon>
+                        <settings:SettingsBlockControl.SettingsActionableElement>
+                            <ToggleSwitch IsChecked="{Binding Settings.TranslucentBackground}" OnContent="Translucent" OffContent="Transparent"/>
+                        </settings:SettingsBlockControl.SettingsActionableElement>
+                    </settings:SettingsBlockControl>
+
+                    <settings:SettingsBlockControl Title="Show Clippy in Tray" Description="Summon Clippy from the System Tray area">
+                        <settings:SettingsBlockControl.Icon>
+                            <TextBlock Text="🗃️" FontSize="24" VerticalAlignment="Center"/>
+                        </settings:SettingsBlockControl.Icon>
+                        <settings:SettingsBlockControl.SettingsActionableElement>
+                            <ToggleSwitch IsChecked="{Binding Settings.TrayClippy}" OnContent="On" OffContent="Off"/>
+                        </settings:SettingsBlockControl.SettingsActionableElement>
+                    </settings:SettingsBlockControl>
+
+                    <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4,28,4,2">Information</TextBlock>
+
+                    <settings:SettingsBlockControl Title="Submit bugs, Track updates, View code" Description="Visit the GitHub repository">
+                        <settings:SettingsBlockControl.Icon>
+                            <TextBlock Text="🐞" FontSize="24" VerticalAlignment="Center"/>
+                        </settings:SettingsBlockControl.Icon>
+                        <settings:SettingsBlockControl.SettingsActionableElement>
+                            <Button Click="GitHub_Click" Width="150" HorizontalContentAlignment="Center">Open</Button>
+                        </settings:SettingsBlockControl.SettingsActionableElement>
+                    </settings:SettingsBlockControl>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="0,20,40,40" VerticalAlignment="Top">
+                    <TextBlock FontSize="14" FontWeight="SemiBold" Margin="4,4,4,8">About this app</TextBlock>
+                    <StackPanel Margin="4,0,4,0" Orientation="Horizontal">
+                        <TextBlock FontSize="14" Margin="0,4,4,0">Clippy by FireCube</TextBlock>
+                        <TextBlock Opacity="0.7" FontSize="14" Margin="2,4,4,0"> - Avalonia</TextBlock>
+                    </StackPanel>
+                    <TextBlock FontSize="14" Margin="4,0,4,0" TextWrapping="Wrap">Developed by FireCubeStudios</TextBlock>
+                    <Button Classes="Hyperlink" Margin="4" Click="Discord_Click">Join Clippy Discord</Button>
+                    <Button Classes="Hyperlink" Margin="4" Click="GitHub_Click">Star the GitHub repository</Button>
+                    <Button Classes="Hyperlink" Margin="4" Click="Twitter_Click">Follow me on Twitter</Button>
+                    <Button Classes="Hyperlink" Margin="4" Click="Bluesky_Click">Follow me on Bluesky</Button>
+                    <Button Click="Exit_Click" Margin="4,12,4,8" Width="150" HorizontalContentAlignment="Center">Exit Background</Button>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+      </Grid>
+    </Panel>
+</Window>

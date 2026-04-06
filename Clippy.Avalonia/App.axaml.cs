@@ -108,9 +108,20 @@ namespace Clippy.Avalonia
             }
         }
 
+        private SettingsWindow? _settingsWindow;
+
         private void TrayIcon_Settings_Click(object? sender, EventArgs e)
         {
-            // TODO: Open Settings Window (Phase 4)
+            if (_settingsWindow == null)
+            {
+                _settingsWindow = new SettingsWindow(Services.GetRequiredService<ISettingsService>());
+                _settingsWindow.Closed += (s, args) => _settingsWindow = null;
+                _settingsWindow.Show();
+            }
+            else
+            {
+                _settingsWindow.Activate();
+            }
         }
 
         private void TrayIcon_Exit_Click(object? sender, EventArgs e)
@@ -128,7 +139,7 @@ namespace Clippy.Avalonia
 
             services.AddSingleton<IChatService, MockChatService>();
             services.AddSingleton<IKeyService, MockKeyService>();
-            services.AddSingleton<ISettingsService, MockSettingsService>();
+            services.AddSingleton<ISettingsService, SettingsService>();
             services.AddSingleton<ClippyViewModel>();
 
             return services.BuildServiceProvider();
