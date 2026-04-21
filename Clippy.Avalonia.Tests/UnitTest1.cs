@@ -1,5 +1,6 @@
 using Xunit;
 using Clippy.Avalonia.Services.Mocks;
+using Clippy.Core.Services;
 
 namespace Clippy.Avalonia.Tests
 {
@@ -19,16 +20,20 @@ namespace Clippy.Avalonia.Tests
         }
 
         [Fact]
-        public void MockSettingsService_Has_Default_Values()
+        public void SettingsService_Has_Default_Values()
         {
             // Arrange
-            var service = new MockSettingsService();
+            var tempPath = System.IO.Path.GetTempFileName();
+            var service = new SettingsService(tempPath);
 
             // Act
             var tokens = service.Tokens;
 
             // Assert
-            Assert.Equal(1000, tokens);
+            Assert.Equal(100, tokens);
+
+            // Cleanup
+            System.IO.File.Delete(tempPath);
         }
     }
 }

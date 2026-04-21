@@ -18,7 +18,6 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Clippy.Core.ViewModels;
 using Clippy.Core.Services;
-using Clippy.Services;
 using System.Threading.Tasks;
 using System.Runtime.ExceptionServices;
 using WinUIEx;
@@ -77,7 +76,7 @@ namespace Clippy
 
             services.AddSingleton<IChatService, ChatService>();
             services.AddSingleton<IKeyService, KeyService>();
-            services.AddSingleton<ISettingsService, SettingsService>();
+            services.AddSingleton<ISettingsService, Clippy.Core.Services.SettingsService>();
             services.AddSingleton<ClippyViewModel>();
 
             return services.BuildServiceProvider();

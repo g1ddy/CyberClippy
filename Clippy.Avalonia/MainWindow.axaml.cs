@@ -31,7 +31,8 @@ namespace Clippy.Avalonia
 
         private void Settings_Click(object? sender, global::Avalonia.Interactivity.RoutedEventArgs e)
         {
-            // Placeholder for Settings
+            var app = (App)global::Avalonia.Application.Current!;
+            app.ShowSettingsWindow();
         }
 
         private void Exit_Click(object? sender, global::Avalonia.Interactivity.RoutedEventArgs e)
