@@ -23,13 +23,17 @@ namespace Clippy.Avalonia.Tests
         public void SettingsService_Has_Default_Values()
         {
             // Arrange
-            var service = new SettingsService();
+            var tempPath = System.IO.Path.GetTempFileName();
+            var service = new SettingsService(tempPath);
 
             // Act
             var tokens = service.Tokens;
 
             // Assert
             Assert.Equal(100, tokens);
+
+            // Cleanup
+            System.IO.File.Delete(tempPath);
         }
     }
 }

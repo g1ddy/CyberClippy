@@ -29,22 +29,10 @@ namespace Clippy.Avalonia
             this.Hide();
         }
 
-        private SettingsWindow? _settingsWindow;
-
         private void Settings_Click(object? sender, global::Avalonia.Interactivity.RoutedEventArgs e)
         {
-            if (_settingsWindow == null)
-            {
-                var app = (App)global::Avalonia.Application.Current!;
-                var settingsService = Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Clippy.Core.Services.ISettingsService>(app.Services);
-                _settingsWindow = new SettingsWindow(settingsService);
-                _settingsWindow.Closed += (s, args) => _settingsWindow = null;
-                _settingsWindow.Show();
-            }
-            else
-            {
-                _settingsWindow.Activate();
-            }
+            var app = (App)global::Avalonia.Application.Current!;
+            app.ShowSettingsWindow();
         }
 
         private void Exit_Click(object? sender, global::Avalonia.Interactivity.RoutedEventArgs e)

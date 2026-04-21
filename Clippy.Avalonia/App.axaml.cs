@@ -110,7 +110,7 @@ namespace Clippy.Avalonia
 
         private SettingsWindow? _settingsWindow;
 
-        private void TrayIcon_Settings_Click(object? sender, EventArgs e)
+        public void ShowSettingsWindow()
         {
             if (_settingsWindow == null)
             {
@@ -122,6 +122,11 @@ namespace Clippy.Avalonia
             {
                 _settingsWindow.Activate();
             }
+        }
+
+        private void TrayIcon_Settings_Click(object? sender, EventArgs e)
+        {
+            ShowSettingsWindow();
         }
 
         private void TrayIcon_Exit_Click(object? sender, EventArgs e)

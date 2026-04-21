@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace Clippy.Core.Services
 {
@@ -13,11 +14,23 @@ namespace Clippy.Core.Services
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public SettingsService()
+        public SettingsService(string settingsFilePath = null)
         {
-            var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Clippy");
-            Directory.CreateDirectory(appDataPath);
-            _settingsFilePath = Path.Combine(appDataPath, "settings.json");
+            if (string.IsNullOrEmpty(settingsFilePath))
+            {
+                var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Clippy");
+                Directory.CreateDirectory(appDataPath);
+                _settingsFilePath = Path.Combine(appDataPath, "settings.json");
+            }
+            else
+            {
+                _settingsFilePath = settingsFilePath;
+                var directory = Path.GetDirectoryName(_settingsFilePath);
+                if (!string.IsNullOrEmpty(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+            }
 
             LoadSettings();
         }
@@ -44,15 +57,24 @@ namespace Clippy.Core.Services
 
         private void SaveSettings()
         {
-            try
+            var json = JsonSerializer.Serialize(_settings, new JsonSerializerOptions { WriteIndented = true });
+
+            Task.Run(async () =>
             {
-                var json = JsonSerializer.Serialize(_settings, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(_settingsFilePath, json);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error saving settings: {ex.Message}");
-            }
+                try
+                {
+#if NETSTANDARD2_1
+                    // File.WriteAllTextAsync isn't guaranteed in all NS2.0/2.1 contexts depending on the underlying BCL, but we can write to it via FileStream or rely on the fact we are off the UI thread via Task.Run.
+                    File.WriteAllText(_settingsFilePath, json);
+#else
+                    await File.WriteAllTextAsync(_settingsFilePath, json);
+#endif
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error saving settings: {ex.Message}");
+                }
+            });
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -121,15 +143,10 @@ namespace Clippy.Core.Services
             get => _settings.Tokens;
             set
             {
-                if (_settings.Tokens != value && value > 50 && value < 2000)
+                var clampedValue = Math.Max(50, Math.Min(2000, value));
+                if (_settings.Tokens != clampedValue)
                 {
-                    _settings.Tokens = value;
-                    SaveSettings();
-                    OnPropertyChanged();
-                }
-                else if (value <= 50 || value >= 2000)
-                {
-                    _settings.Tokens = 100;
+                    _settings.Tokens = clampedValue;
                     SaveSettings();
                     OnPropertyChanged();
                 }
