@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="using:Clippy.Avalonia.Controls.Settings"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="150"
+             x:Class="Clippy.Avalonia.Controls.Settings.SettingsBlockControl">
+
+    <Border Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+            BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+            BorderThickness="1"
+            CornerRadius="8"
+            Margin="2"
+            BoxShadow="0 2 4 0 #20000000">
+
+        <local:SettingsDisplayControl Title="{Binding Title, RelativeSource={RelativeSource AncestorType=local:SettingsBlockControl}}"
+                                      Description="{Binding Description, RelativeSource={RelativeSource AncestorType=local:SettingsBlockControl}}"
+                                      Icon="{Binding Icon, RelativeSource={RelativeSource AncestorType=local:SettingsBlockControl}}"
+                                      SettingsActionableElement="{Binding SettingsActionableElement, RelativeSource={RelativeSource AncestorType=local:SettingsBlockControl}}"
+                                      AdditionalDescriptionContent="{Binding AdditionalDescriptionContent, RelativeSource={RelativeSource AncestorType=local:SettingsBlockControl}}"/>
+
+    </Border>
+</UserControl>

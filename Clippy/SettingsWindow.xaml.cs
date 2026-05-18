@@ -1,5 +1,4 @@
 ﻿using Clippy.Core.Services;
-using Clippy.Services;
 using Clippy.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Composition.SystemBackdrops;
